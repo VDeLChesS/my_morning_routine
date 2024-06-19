@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit MorningRoutines{% endblock %}
+
+{% block body %}
+    <h1>Edit MorningRoutines</h1>
+
+    {{ include('morning_routines/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_morning_routines_index') }}">back to list</a>
+
+    {{ include('morning_routines/_delete_form.html.twig') }}
+{% endblock %}

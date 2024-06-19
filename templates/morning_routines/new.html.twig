@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New MorningRoutines{% endblock %}
+
+{% block body %}
+    <h1>Create new MorningRoutines</h1>
+
+    {{ include('morning_routines/_form.html.twig') }}
+
+    <a href="{{ path('app_morning_routines_index') }}">back to list</a>
+{% endblock %}

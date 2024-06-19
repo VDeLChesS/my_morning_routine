@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MorningRoutines index{% endblock %}
+
+{% block body %}
+    <h1>MorningRoutines index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Active</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for morning_routine in morning_routines %}
+            <tr>
+                <td>{{ morning_routine.id }}</td>
+                <td>{{ morning_routine.name }}</td>
+                <td>{{ morning_routine.active ? 'Yes' : 'No' }}</td>
+                <td>{{ morning_routine.createdAt ? morning_routine.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ morning_routine.updatedAt ? morning_routine.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_morning_routines_show', {'id': morning_routine.id}) }}">show</a>
+                    <a href="{{ path('app_morning_routines_edit', {'id': morning_routine.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_morning_routines_new') }}">Create new</a>
+{% endblock %}
