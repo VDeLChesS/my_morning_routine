@@ -168,26 +168,4 @@ class Challenges
     {
         return $this->completions;
     }
-
-    public function addCompletion(Completions $completion): static
-    {
-        if (!$this->completions->contains($completion)) {
-            $this->completions->add($completion);
-            $completion->setChallenges($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCompletion(Completions $completion): static
-    {
-        if ($this->completions->removeElement($completion)) {
-            // set the owning side to null (unless already changed)
-            if ($completion->getChallenges() === $this) {
-                $completion->setChallenges(null);
-            }
-        }
-
-        return $this;
-    }
 }

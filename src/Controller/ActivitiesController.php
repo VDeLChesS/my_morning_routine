@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/activities')]
+#[Route('/api/activities')]
 class ActivitiesController extends AbstractController
 {
     #[Route('/', name: 'app_activities_index', methods: ['GET'])]
@@ -28,8 +28,13 @@ class ActivitiesController extends AbstractController
         $activity = new Activities();
         $form = $this->createForm(ActivitiesType::class, $activity);
         $form->handleRequest($request);
+        $currentDateTime = new \DateTime();
+        $isCompleted = 0;
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $activity->setCompleted($isCompleted);
+            $activity->setCreatedAt($currentDateTime);
+            $activity->setUpdatedAt($currentDateTime);
             $entityManager->persist($activity);
             $entityManager->flush();
 

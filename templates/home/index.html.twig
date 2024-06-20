@@ -1,20 +1,72 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Home
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('styles/app.scss') }}">
+	<style>
+		html {
+			box-sizing: border-box;
+		}
+
+		body {
+			margin: 0;
+			min-height: 100vh;
+		}
+	</style>
+{% endblock %}
+
+{% block javascripts %}
+	<script src="{{ asset('js/home.js') }}"></script>
+	<script src="https://kit.fontawesome.com/ecb1fa5ff2.js" crossorigin="anonymous"></script>
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+	<nav class="nav-wrapper">
+		<div class="nav-left">
+			<img src="{{ asset('uploads/pictures/logo.png')}}" height="50px" width="50px">
+		</div>
+		<div class="nav-right">
+			<div class="menu-icon" onclick="toggleMenu()">
+				<div class="bar1"></div>
+				<div class="bar2"></div>
+				<div class="bar3"></div>
+			</div>
+		</div>
+		<div id="nav">
+			<div class="strip"></div>
+			<div class="strip"></div>
+			<div class="strip"></div>
+			<div class="strip"></div>
+			<div class="strip"></div>
+			<ul>
+				<li><a href="#home" onclick="hideMenu()">Home</a></li>
+				<li><a href="#about" onclick="hideMenu()">About</a></li>
+				<li><a href="#gallery" onclick="hideMenu()">Gallery</a></li>
+				<li><a href="#blog" onclick="hideMenu()">Blog</a></li>
+				<li><a href="#contact" onclick="hideMenu()">Contact</a></li>
+			</ul>
+		</div>
+	</nav>
+	<main>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/deluc/Desktop/my_morning_routine/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>C:/Users/deluc/Desktop/my_morning_routine/templates/home/index.html.twig</code></li>
-    </ul>
-</div>
-{% endblock %}
+		<section
+			id="home">
+			<!-- Video -->
+			<div class="video-container">
+				<video autoplay loop muted>
+					<source src="{{ asset('uploads/morning_bg.mp4') }}">
+				</video>
+			</div>
+			<!-- Overlay -->
+			<div class="overlay">
+				<div>
+					<h1>Your Morning Routine Planner</h1>
+					<p>Get your routine activities organized to improve your quality of Life</p>
+				</div>
+			</div>
+		</section>
+	</main>
+</body>{% endblock %}

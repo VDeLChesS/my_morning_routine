@@ -1,40 +1,44 @@
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('styles/navbar/navbar.css') }}">
+	<link rel="stylesheet" href="{{ asset('styles/CSS/navbar/navbar.css') }}">
 {% endblock %}
 
 {% block javascripts %}
-    <script src="{{ asset('js/navbar.js') }}"></script>
+	<script src="{{ asset('js/navbar.js') }}"></script>
 {% endblock %}
 
 {% block navbar %}
 
-<div id="myNav" class="overlay">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <div class="overlay-content">
-    <div>
-      <a href="{{ path('app_home') }}">Home </a>
-      <a href="{{ path('app_about') }}">About </a>
-      <a href="{{ path('app_services') }}">Pricing </a>
-      <a href="{{ path('app_contact') }}">Contact </a>
-    </div>
-    <div>
-      {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <a href="{{ path('admin') }}">Dashboard</a>
-        <a href="{{ path('app_logout') }}">Logout</a>
-      {% else %}
-        <a href="{{ path('app_register') }}">Register</a>
-        <a href="{{ path('app_login') }}">Login</a>
-      {% endif %}
-    </div>
-  </div>
+	<div id="myNav" class="overlay">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<div class="overlay-content">
+			<div>
+				<a href="{{ path('app_home') }}">Home
+				</a>
+				<a href="{{ path('app_about') }}">About
+				</a>
+				<a href="{{ path('app_services') }}">Pricing
+				</a>
+				<a href="{{ path('app_contact') }}">Contact
+				</a>
+			</div>
+			<div>
+				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+					<a href="{{ path('admin') }}">Dashboard</a>
+					<a href="{{ path('app_logout') }}">Logout</a>
+				{% else %}
+					<a href="{{ path('app_register') }}">Register</a>
+					<a href="{{ path('app_login') }}">Login</a>
+				{% endif %}
+			</div>
+		</div>
 
-</div>
+	</div>
 
 
-<div class="container" onclick="openNav(this)">
-  <div class="bar1"></div>
-  <div class="bar2"></div>
-  <div class="bar3"></div>
-</div>
+	<div class="container-fluid" onclick="openNav(this)">
+		<div class="bar1"></div>
+		<div class="bar2"></div>
+		<div class="bar3"></div>
+	</div>
 
 {% endblock %}
