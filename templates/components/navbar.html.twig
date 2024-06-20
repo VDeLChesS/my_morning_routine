@@ -1,44 +1,45 @@
 {% block stylesheets %}
-	<link rel="stylesheet" href="{{ asset('styles/CSS/navbar/navbar.css') }}">
+	<link rel="stylesheet" href="{{ asset('styles/app.scss') }}">
 {% endblock %}
 
 {% block javascripts %}
-	<script src="{{ asset('js/navbar.js') }}"></script>
+	<script src="{{ asset('js/home.js') }}"></script>
 {% endblock %}
 
 {% block navbar %}
-
-	<div id="myNav" class="overlay">
-		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-		<div class="overlay-content">
-			<div>
-				<a href="{{ path('app_home') }}">Home
-				</a>
-				<a href="{{ path('app_about') }}">About
-				</a>
-				<a href="{{ path('app_services') }}">Pricing
-				</a>
-				<a href="{{ path('app_contact') }}">Contact
-				</a>
-			</div>
-			<div>
-				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-					<a href="{{ path('admin') }}">Dashboard</a>
-					<a href="{{ path('app_logout') }}">Logout</a>
-				{% else %}
-					<a href="{{ path('app_register') }}">Register</a>
-					<a href="{{ path('app_login') }}">Login</a>
-				{% endif %}
+	<nav class="nav-wrapper">
+		<div class="nav-left">
+			<img src="{{ asset('uploads/pictures/logo.png')}}" height="50px" width="50px">
+		</div>
+		<div class="nav-right">
+			<div class="menu-icon" onclick="toggleMenu()">
+				<div class="bar1"></div>
+				<div class="bar2"></div>
+				<div class="bar3"></div>
 			</div>
 		</div>
-
-	</div>
-
-
-	<div class="container-fluid" onclick="openNav(this)">
-		<div class="bar1"></div>
-		<div class="bar2"></div>
-		<div class="bar3"></div>
-	</div>
-
+		<div id="nav">
+			<div class="strip"></div>
+			<div class="strip"></div>
+			<div class="strip"></div>
+			<div class="strip"></div>
+			<div class="strip"></div>
+			<div class="strip"></div>
+			<ul>
+				<li><a href="{{path('app_home') }}" onclick="hideMenu()">Home</a></li>
+				<li><a href="{{ path('app_about') }}" onclick="hideMenu()">About</a></li>
+				<li><a href="{{ path('app_services') }}" onclick="hideMenu()">Pricing</a></li>
+				<li><a href="{{ path('app_contact') }}" onclick="hideMenu()">Contact</a></li>
+				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+				<li><a href="{{ path('app_logout') }}" onclick="hideMenu()">Logout</a></li>
+				{% if is_granted('ROLE_ADMIN') %}
+				<li><a href="{{ path('admin') }}" onclick="hideMenu()">Dashboard</a></li>
+				{% endif %}
+				{% else %}
+				<li><a href="{{ path('app_register') }}" onclick="hideMenu()">Register</a></li>
+				<li><a href="{{ path('app_login') }}" onclick="hideMenu()">Login</a></li>
+				{% endif %}
+			</ul>
+		</div>
+	</nav>
 {% endblock %}

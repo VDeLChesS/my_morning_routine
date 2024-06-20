@@ -23,33 +23,22 @@
 {% endblock %}
 
 {% block body %}
+	{{ include('../components/navbar.html.twig') }}
 
-	<nav class="nav-wrapper">
-		<div class="nav-left">
-			<img src="{{ asset('uploads/pictures/logo.png')}}" height="50px" width="50px">
+	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+		<div class="alert alert-success" role="alert">
+			Welcome
+			{{ app.user.username }}
 		</div>
-		<div class="nav-right">
-			<div class="menu-icon" onclick="toggleMenu()">
-				<div class="bar1"></div>
-				<div class="bar2"></div>
-				<div class="bar3"></div>
-			</div>
+	{% endif %}
+
+	{% if is_granted('ROLE_ADMIN') %}
+		<div class="alert alert-success" role="alert">
+			Welcome Admin
 		</div>
-		<div id="nav">
-			<div class="strip"></div>
-			<div class="strip"></div>
-			<div class="strip"></div>
-			<div class="strip"></div>
-			<div class="strip"></div>
-			<ul>
-				<li><a href="#home" onclick="hideMenu()">Home</a></li>
-				<li><a href="#about" onclick="hideMenu()">About</a></li>
-				<li><a href="#gallery" onclick="hideMenu()">Gallery</a></li>
-				<li><a href="#blog" onclick="hideMenu()">Blog</a></li>
-				<li><a href="#contact" onclick="hideMenu()">Contact</a></li>
-			</ul>
-		</div>
-	</nav>
+	{% endif %}
+
+
 	<main>
 
 		<section
@@ -69,4 +58,4 @@
 			</div>
 		</section>
 	</main>
-</body>{% endblock %}
+{% endblock %}
