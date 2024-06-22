@@ -5,42 +5,82 @@
 
 {% block stylesheets %}
 	<link rel="stylesheet" href="{{ asset('styles/app.scss') }}">
-	<style>
-		html {
-			box-sizing: border-box;
-		}
-
-		body {
-			margin: 0;
-			min-height: 100vh;
-		}
-	</style>
+	{{ parent() }}
 {% endblock %}
 
 {% block javascripts %}
-	<script src="{{ asset('js/home.js') }}"></script>
-	<script src="https://kit.fontawesome.com/ecb1fa5ff2.js" crossorigin="anonymous"></script>
+	{{ parent() }}
+	<script>
+
+		function toggleMenu() {
+nav.classList.toggle('active');
+menuIcon.classList.toggle('active');
+listItems.forEach((listItem) => {
+listItem.classList.toggle('active');
+});
+}
+
+function hideMenu() {
+nav.classList.remove('active');
+menuIcon.classList.remove('active');
+listItems.forEach((listItem) => {
+listItem.classList.remove('active');
+});
+}
+	</script>
 {% endblock %}
 
 {% block body %}
-	{{ include('../components/navbar.html.twig') }}
-
-	{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-		<div class="alert alert-success" role="alert">
-			Welcome
-			{{ app.user.username }}
+	{% block navbar %}{% endblock %}
+	<nav class="nav-wrapper">
+		<div class="nav-left">
+			<img src="{{ asset('uploads/pictures/logo.png')}}" height="50px" width="50px"/>
 		</div>
-	{% endif %}
-
-	{% if is_granted('ROLE_ADMIN') %}
-		<div class="alert alert-success" role="alert">
-			Welcome Admin
+		<div class="nav-right">
+			<div class="menu-icon" onclick="toggleMenu()">
+				<div class="bar1"></div>
+				<div class="bar2"></div>
+				<div class="bar3"></div>
+			</div>
 		</div>
-	{% endif %}
-
-
+		<div id="nav">
+			<div class="strip"></div>
+			<div class="strip"></div>
+			<div class="strip"></div>
+			<div class="strip"></div>
+			<div class="strip"></div>
+			<div class="strip"></div>
+			<ul>
+				<li>
+					<a href="{{ path('app_about') }}" onclick="hideMenu()">About</a>
+				</li>
+				<li>
+					<a href="{{ path('app_services') }}" onclick="hideMenu()">Pricing</a>
+				</li>
+				<li>
+					<a href="{{ path('app_contact') }}" onclick="hideMenu()">Contact</a>
+				</li>
+				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+					<li>
+						<a href="{{ path('app_logout') }}" onclick="hideMenu()">Logout</a>
+					</li>
+					{% if is_granted('ROLE_ADMIN') %}
+						<li>
+							<a href="{{ path('admin') }}" onclick="hideMenu()">Dashboard</a>
+						</li>
+					{% endif %}
+				{% else %}
+					<li>
+						<a href="{{ path('app_register') }}" onclick="hideMenu()">Register</a>
+					</li>
+					<li>
+						<a href="{{ path('app_login') }}" onclick="hideMenu()">Login</a>
+					</li>
+				{% endif %}
+			</ul>
+		</div>
+	</nav>
 	<main>
-
 		<section
 			id="home">
 			<!-- Video -->
@@ -59,3 +99,4 @@
 		</section>
 	</main>
 {% endblock %}
+{% block footer %}{% endblock %}

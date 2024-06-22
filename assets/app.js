@@ -1,5 +1,9 @@
 import './bootstrap.js';
-import './js/home.js';
+import './js/navbar.js';
+import './js/flash-messages.js';
+import './js/confirm-delete.js';
+import './js/confirm-leave.js';
+import 'jquery';
 /*
  * Welcome to your app's main JavaScript file!
  *
@@ -8,4 +12,23 @@ import './js/home.js';
  */
 import './styles/app.css';
 import './styles/app.scss';
+
+
+const $ = require('jquery');
+global.$ = global.jQuery = $;
+
+require('bootstrap');
+// import 'bootstrap';
+const navbar = document.getElementById('navbar');
+const navbarToggle = document.getElementById('navbar-toggle');
+const navbarClose = document.getElementById('navbar-close');
+
+navbarToggle.addEventListener('click', () => {
+    navbar.classList.toggle('hidden');
+    });
+navbarClose.addEventListener('click', () => {
+    navbar.classList.add('hidden');
+    }
+);
+
 
